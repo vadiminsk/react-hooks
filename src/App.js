@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Post from './Post';
 
 const App = ({ initialCount }) => {
   // let [count, setCount] = useState(initialCount);
@@ -41,6 +42,14 @@ const App = ({ initialCount }) => {
     setPosts([...posts, newPost]);
   };
 
+  const removePosts = () => {
+    setPosts([]);
+  };
+
+  useEffect(() => {
+    console.log('useEffect');
+  }, [state]);
+
   return (
     <div>
       <h3>{state.user}</h3>
@@ -49,10 +58,11 @@ const App = ({ initialCount }) => {
       <button onClick={minusOne}>Minus one</button>
       {/* <button onClick={() => setCount(initialCount)}>Reset</button> */}
       <hr />
-      {posts.map((post) => {
-        return <div key={post.id}>{post.name}</div>;
-      })}
+      {posts.map((post, i) => (
+        <Post post={post} key={i} />
+      ))}
       <button onClick={addOnePost}>Add one more post</button>
+      <button onClick={removePosts}>Remove posts</button>
     </div>
   );
 };
