@@ -1,23 +1,15 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import User from './components/User';
+import { MyProvider } from './context';
 
 const App = () => {
-  const inputText = useRef();
-
-  const triggerHandler = () => {
-    console.log(inputText.current.value);
-  };
-
   return (
     <div>
-      <h1>Form:</h1>
-      <InputComponent ref={inputText} />
-      <button onClick={triggerHandler}>Trigger</button>
+      <MyProvider>
+        <User />
+      </MyProvider>
     </div>
   );
 };
-
-const InputComponent = React.forwardRef((props, ref) => {
-  return <input type='text' ref={ref} />;
-});
 
 export default App;
